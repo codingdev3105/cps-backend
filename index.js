@@ -54,6 +54,26 @@ app.post('/groups', (req, res) => {
 });
 
 // ------------------
+// Supprimer un groupe (ADMIN)
+// ------------------
+app.delete('/groups/:name', (req, res) => {
+  const { name } = req.params;
+
+  if (!name) {
+    return res.status(400).json({ error: 'Nom du groupe requis' });
+  }
+
+  if (!groups[name]) {
+    return res.status(404).json({ error: `Le groupe "${name}" n'existe pas` });
+  }
+
+  delete groups[name];
+  saveGroups();
+
+  return res.json({ message: `Groupe "${name}" supprimé avec succès` });
+});
+
+// ------------------
 // Lister tous les groupes
 // ------------------
 app.get('/groups', (req, res) => {
