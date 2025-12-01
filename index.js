@@ -102,7 +102,7 @@ app.post('/data/:group', (req, res) => {
     temperature,
     humidity,
     date: new Date().toISOString(),
-    alert: temperature > 30
+    alert: temperature > 20
   };
 
   // Ajouter le log
